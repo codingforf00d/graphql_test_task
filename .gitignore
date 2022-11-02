@@ -1,0 +1,15 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+*.lock
+.DS_Store
+
+# Dependency directories
+package-lock.json
+node_modules
+/docker-volumes
+
+# Optional npm cache directory
+.npm
+.idea

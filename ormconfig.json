@@ -1,0 +1,14 @@
+{
+  "type": "mysql",
+  "host": "127.0.0.1",
+  "port": 33306,
+  "username": "root",
+  "password": "example",
+  "database": "books",
+  "entities": ["./src/core/entities/*.ts"],
+  "migrations": ["./migration/*.ts"],
+  "cli": {
+    "migrationsDir": "./migration/",
+    "entitiesDir": "./src/core/entities"
+  }
+}
