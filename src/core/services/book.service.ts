@@ -19,6 +19,10 @@ export class BookService {
     return new BooksQB();
   }
 
+  async getCount(params: FindBooksByParams) {
+    return await this.booksQB().findBy(params).qb.getCount();
+  }
+
   async findBy(params: FindBooksByParams) {
     return await this.booksQB().findBy(params).qb.getMany();
   }

@@ -1,8 +1,16 @@
 import { BatchLoadFn } from "dataloader";
 import { container } from "tsyringe";
 import { BookEntity } from "../../core/entities";
-import { BookService } from "../../core/services";
+import { BookService, FindBooksByParams } from "../../core/services";
 import { mappingResultForDataLoader } from "../utils";
+
+export const booksCount = async (
+  params: FindBooksByParams
+): Promise<number> => {
+  const bookService = container.resolve(BookService);
+
+  return await bookService.getCount(params);
+}
 
 export const booksForAuthors: BatchLoadFn<number, BookEntity[] | null> = async (
   authorsIds: ReadonlyArray<number>
@@ -27,4 +35,17 @@ export const booksForPublishers: BatchLoadFn<
   });
 
   return mappingResultForDataLoader(publishersIds, result, "publisherId", true);
+};
+
+export const booksForCategories: BatchLoadFn<
+  number,
+  BookEntity[] | null
+> = async (categoriesIds: ReadonlyArray<number>) => {
+  const bookService = container.resolve(BookService);
+
+  const result = await bookService.findBy({
+    categoriesIds,
+  });
+
+  return mappingResultForDataLoader(categoriesIds, result, "categoryId", true);
 };
