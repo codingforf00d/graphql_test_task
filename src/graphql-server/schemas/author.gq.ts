@@ -73,9 +73,7 @@ export class AuthorResolver {
     @Root() author: GqAuthor,
     @Ctx() { dataLoaders }: DataLoadersContext
   ): Promise<number> {
-    return dataLoaders.booksForAuthors.loadOrNull(author.authorId).then(
-      (books) => books?.length ?? 0
-    );
+    return await dataLoaders.booksCount({authorsIds: [author.authorId]});
   }
 
   @FieldResolver(() => [GqBook], {
