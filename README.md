@@ -77,7 +77,7 @@ fragment bookInfo on GqBook {
 }
 
 query getBook {
-  books(input: { booksIds: [1, 2] }) {
+  books(input: { booksIds: [1, 2], publishersIds: [1], categoriesIds: [1] }) {
     ...bookInfo,
     author {
       firstName,
@@ -94,6 +94,7 @@ query getAuthorsBooks {
     authorId
     firstName
     lastName
+    booksCount
     books {
       name,
       pageCount,

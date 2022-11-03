@@ -28,3 +28,16 @@ export const booksForPublishers: BatchLoadFn<
 
   return mappingResultForDataLoader(publishersIds, result, "publisherId", true);
 };
+
+export const booksForCategories: BatchLoadFn<
+  number,
+  BookEntity[] | null
+> = async (categoriesIds: ReadonlyArray<number>) => {
+  const bookService = container.resolve(BookService);
+
+  const result = await bookService.findBy({
+    categoriesIds,
+  });
+
+  return mappingResultForDataLoader(categoriesIds, result, "categoryId", true);
+};

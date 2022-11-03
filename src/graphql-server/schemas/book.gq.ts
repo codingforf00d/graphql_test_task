@@ -34,6 +34,18 @@ class GqCreateBookInput extends BookFields {}
   description: "Параметры поиска книг",
 })
 class GqFindBookInput {
+  @Field(() => [ID], {nullable: true})
+  booksIds: ReadonlyArray<number>;
+  @Field(() => [ID], {nullable: true})
+  publishersIds: ReadonlyArray<number>;
+  @Field(() => [ID], {nullable: true})
+  categoriesIds: ReadonlyArray<number>;
+}
+
+@InputType({
+  description: "Параметры для удаления книг",
+})
+class GqDropBookInput {
   @Field(() => [ID])
   booksIds: ReadonlyArray<number>;
 }
@@ -61,7 +73,7 @@ export class BookResolver {
   @Mutation(() => BookEntity, {
     description: "Удалить книгу",
   })
-  async dropBook(@Arg("input") input: GqFindBookInput) {
+  async dropBook(@Arg("input") input: GqDropBookInput) {
     return await this.bookService.drop(input);
   }
 

@@ -6,7 +6,7 @@ import {
   PublisherEntity,
 } from "../../core/entities";
 import { NullableDataLoader } from "./utils";
-import { booksForAuthors, booksForPublishers } from "./books.dataloader";
+import { booksForAuthors, booksForCategories, booksForPublishers } from "./books.dataloader";
 import { author } from "./authors.dataloader";
 import { country } from "./country.dataloader";
 import { publisher, publishersFromCountry } from "./publisher.dataloader";
@@ -20,6 +20,7 @@ interface AppDataLoaders {
   author: NullableDataLoader<number, AuthorEntity | null>;
   booksForAuthors: NullableDataLoader<number, BookEntity[] | null>;
   booksForPublishers: NullableDataLoader<number, BookEntity[] | null>;
+  booksForCategories: NullableDataLoader<number, BookEntity[] | null>;
   country: NullableDataLoader<number, CountryEntity | null>;
   publisher: NullableDataLoader<number, PublisherEntity | null>;
   publishersFromCountry: NullableDataLoader<number, PublisherEntity[] | null>;
@@ -31,6 +32,7 @@ export function createDataLoaders(): AppDataLoaders {
     author: new NullableDataLoader(author),
     booksForAuthors: new NullableDataLoader(booksForAuthors),
     booksForPublishers: new NullableDataLoader(booksForPublishers),
+    booksForCategories: new NullableDataLoader(booksForCategories),
     country: new NullableDataLoader(country),
     publisher: new NullableDataLoader(publisher),
     publishersFromCountry: new NullableDataLoader(publishersFromCountry),

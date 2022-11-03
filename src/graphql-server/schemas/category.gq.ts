@@ -57,4 +57,15 @@ export class CategoryResolver {
   ): Promise<GqCategory> {
     return this.categoryService.save(input);
   }
+
+  @FieldResolver(() => [GqBook], {
+    description: "Список книг автора",
+    nullable: true,
+  })
+  async books(
+    @Root() category: GqCategory,
+    @Ctx() { dataLoaders }: DataLoadersContext
+  ): Promise<GqBook[] | null> {
+    return dataLoaders.booksForCategories.loadOrNull(category.categoryId);
+  }
 }
